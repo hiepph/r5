@@ -34,7 +34,7 @@ int main(int argc, char** argv)
         }
 
         // Get only 1/4 bottom rows
-        float row_offset = (float)frame.rows * 3 / 4;
+        double row_offset = (double)frame.rows * 3 / 4;
         Mat crop = frame(Range(row_offset, frame.rows), Range::all());
         Mat gray;
         cvtColor(crop, gray, CV_BGR2GRAY);
