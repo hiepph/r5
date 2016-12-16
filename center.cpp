@@ -20,7 +20,7 @@ int main(int argc, char** argv)
     }
 
     namedWindow(video, WINDOW_AUTOSIZE);
-    
+
     int currentCount = 0;
     int seemRight = 0;
     int frameCount = capture.get(CV_CAP_PROP_FRAME_COUNT);
@@ -79,7 +79,7 @@ int main(int argc, char** argv)
         imshow("demo1", drawing);
 
         // offset for midpoint
-        midPoint.y += row_offset; 
+        midPoint.y += row_offset;
 
         // Debug
         if (contours.size() == 2) {
