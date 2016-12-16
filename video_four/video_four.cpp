@@ -94,19 +94,29 @@ int main() {
 		// Drawing midpoint
 		Scalar color = Scalar(0, 0, 255);
 		Point2f midPoint = (mc[0] + mc[1]) * 0.5;
-		circle(drawing, midPoint, 4, color, -1, 8, 0);
-		circle(temp, midPoint, 4, color, -1, 8, 0);
+
 		cerr << endl;
 		cout << endl;
 		cerr << "mid: (" << midPoint.x << ", " << midPoint.y << ") - ";
 		if (currentFrame != 1) {
-			cerr << "dx = " << abs(midPoint.x - prevMidPoint.x) << ", " << "dy = " << abs(midPoint.y - prevMidPoint.y) << endl;
-			cout << "dx = " << abs(midPoint.x - prevMidPoint.x) << ", " << "dy = " << abs(midPoint.y - prevMidPoint.y) << endl;
+			float
+				dx = abs(midPoint.x - prevMidPoint.x),
+				dy = abs(midPoint.y - prevMidPoint.y);
+
+			cerr << "dx = " << dx << ", " << "dy = " << dy << endl;
+			cout << "dx = " << dx << ", " << "dy = " << dy << endl;
+
+			if (dx > 50.0) {
+				cerr << "CRASH!!! Reuse previous point" << endl;
+				midPoint = prevMidPoint;
+			}
 		}
 		else {
 			cerr << endl;
 			cout << endl;
 		}
+		circle(drawing, midPoint, 4, color, -1, 8, 0);
+		circle(temp, midPoint, 4, color, -1, 8, 0);
 
 		prevMidPoint = midPoint;
 		fin = drawing;
@@ -123,3 +133,4 @@ int main() {
 
 	return 0;
 }
+
