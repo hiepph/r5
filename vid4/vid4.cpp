@@ -102,9 +102,9 @@ int main(int argc, char** argv) {
         sort(mu.begin(), mu.end(), countour_area_comparision);
 
         // Get the mass centers
-        vector<Point2f> mc(contours.size());
+        vector<Point2d> mc(contours.size());
         for (size_t i = 0; i < contours.size(); ++i) {
-            mc[i] = Point2f(mu[i].m10 / mu[i].m00, mu[i].m01 / mu[i].m00);
+            mc[i] = Point2d(mu[i].m10 / mu[i].m00, mu[i].m01 / mu[i].m00);
         }
 
         // Draw contours
