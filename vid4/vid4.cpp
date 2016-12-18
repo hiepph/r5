@@ -125,8 +125,12 @@ int main(int argc, char** argv) {
           double dx = abs(mid_point.x - prev_point.x);
           double dy = abs(mid_point.y - prev_point.y);
 
-          if ((dx > 50.0) || (dy > frame.rows / 4)) {
-            mid_point = prev_point;
+          if (dx > 50.0) {
+              mid_point.x = prev_point.x;
+          }
+
+          if (dy > frame.rows / 4) {
+              mid_point.y = prev_point.y;
           }
         }
 
