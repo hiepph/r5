@@ -65,9 +65,9 @@ int main(int argc, char** argv) {
         Mat frame;
         cap >> frame;
         if (frame.empty()) {
-          break;
+            break;
         }
-        
+
         // We only focus at 1/4 bottom of video, so crop frame
         // Remember to add the offset 3/4 of row (y)
         double row_offset = (double)frame.rows * 3 / 4;
@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
         // Grayscale
         Mat gray;
         cvtColor(crop, gray, CV_BGR2GRAY);
-        
+
         // Blur
         blur(gray, gray, Size(4, 4));
 
@@ -142,16 +142,15 @@ int main(int argc, char** argv) {
         // Wait to display frame
         waitKey(20);
 
+        // Output frame_id x_center y_center
+        // Offset for midpoint, too
+        cout << current_frame << " " << (int)mid_point.x << " " << (int)(mid_point.y + row_offset) << endl;
+
         // Increate index of frame
         current_frame++;
 
         // Update prev point for interpolating (prevent problem frame)
         prev_point = mid_point;
-
-        // Offset for midpoint 
-        // Output frame_id x_center y_center
-        mid_point.y += row_offset;
-        cout << current_frame << " " << mid_point.x << " " << mid_point.y  << endl;
     }
 
     return 0;
