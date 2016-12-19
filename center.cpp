@@ -1,6 +1,7 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <string>
+#include <math.h>
 
 using namespace std;
 using namespace cv;
@@ -55,6 +56,7 @@ int main(int argc, char** argv)
      */
 
     int current_frame = 0;
+    Point2d midpoint, prevpoint;
     while (1) {
         // If cannot read the video, which means it is the end of video!
         Mat frame;
@@ -111,6 +113,23 @@ int main(int argc, char** argv)
         // Get (x, y) of the  midpoint
         // And draw it
         midpoint *= 0.5;
+
+        // Rescue problem frame
+        if (current_frame != 0) {
+          // -nan bug
+          if (isnan(midpoint.x) || isnan(midpoint.y)) {
+            midpoint = prevpoint;
+          }
+
+          // go out too far
+          double dx = abs(midpoint.x - prevpoint.x);
+          double dy = abs(midpoint.y - prevpoint.y);
+
+          if ((dx > 20.0) || (dy > 10.0)) {
+              midpoint = prevpoint;
+          }
+        }
+
         circle(drawing, midpoint, 4, Scalar(0, 0, 255), -1, 8, 0);
 
         // Show frame to windows
@@ -121,10 +140,14 @@ int main(int argc, char** argv)
 
         // Offset for midpoint
         // Output frame_id x_center y_center
-        cout << current_frame << " " << (int)midpoint.x << " " << (int)(midpoint.y + row_offset) << endl;
+        // cout << current_frame << " " << (int)midpoint.x << " " << (int)(midpoint.y + row_offset) << endl;
+        cout << current_frame << " " << midpoint.x << " " << (midpoint.y + row_offset) << endl;
 
         // Increate index of frame
         current_frame++;
+
+        // Update prev point for interpolating (prevent problem frame)
+        prevpoint = midpoint;
     }
 
     return 0;
