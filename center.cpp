@@ -121,7 +121,7 @@ int main(int argc, char** argv)
 
         // Offset for midpoint
         // Output frame_id x_center y_center
-        cout << current_frame++ << " " << (int)midpoint.x << " " << (int)(midpoint.y + row_offset) << endl;
+        cout << current_frame << " " << (int)midpoint.x << " " << (int)(midpoint.y + row_offset) << endl;
 
         // Increate index of frame
         current_frame++;
