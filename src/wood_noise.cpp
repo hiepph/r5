@@ -1,3 +1,16 @@
+/**
+ * This is code for processing with wood floor, single lane:
+ *  + 04 - Nen go, duong cong nhieu.avi
+ *
+ * There are bad noises here and there, and reflected light is real problems.
+ * Solution is of course pre-processing with denoising algorithm,
+ * skip all reflected light and only detect 2-side contours.
+ *
+ * With problem frame, interpolating (get previous center(x, y)) is a considerable solution.
+ *
+ * Copyright 2016, @tim Team. All rights reserved.
+ */
+
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <algorithm>
@@ -139,10 +152,6 @@ int main(int argc, char** argv) {
         // Show frame to windows
         imshow(video, drawing);
 
-        // Wait to display frame
-        waitKey(20);
-
-        // Output frame_id x_center y_center
         // Offset for midpoint, too
         cout << current_frame << " " << (int)mid_point.x << " " << (int)(mid_point.y + row_offset) << endl;
 
@@ -151,6 +160,9 @@ int main(int argc, char** argv) {
 
         // Update prev point for interpolating (prevent problem frame)
         prev_point = mid_point;
+
+        // Wait to display frame
+        waitKey(20);
     }
 
     return 0;

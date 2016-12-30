@@ -169,7 +169,7 @@ int main(int argc, char** argv) {
         // Rescue problem frame
         if (current_frame != 0) {
             double dx = abs(midpoint.x - prevpoint.x);
-            double dy = abs(midpoint.y - prevpoint.y);
+            // double dy = abs(midpoint.y - prevpoint.y);
 
             // go out too far
             if (dx > 7.0) {
