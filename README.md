@@ -1,28 +1,53 @@
+## Darkroom
+
+This is for video processing and export (x, y) of center point.
+This will feed the data correponding to each frame, serving for predict purpose.
 
 ## Build
+
+For each video, there are corresponding source file in `src` folder.
+Run the following command and system will auto-build with correponding source.
+
 ```
-make
+make build TARGET=carpet|marble|wood_noise|wood_multi
 ```
 
+With:
+  + `carpet.cpp`: videos 1 + 2
+
+  + `marble.cpp`: videos 3
+
+  + `wood_noise.cpp`: videos 4
+
+  + `wood_multi.cpp`: videos 5
+
+
 ## Run
+
+Ouput of build process will output an exectable `center` file:
+
 ```
 ./center <video_path>
 ```
 
+### Demo
+
+![Crop](demos/crop.png)
+
+Demo came with a frame (cropped) from wood floor & multi lane.
+As you can see, it draws contours, red point for center point.
+
 ## Clean
+
+For a fresh start:
+
 ```
 make clean
 ```
 
-## Demo
-![Crop](demos/crop.png)
-
-
 ## Development and contributing
 
-+ Root folder is for production, and `center.cpp` is the source file
-
-+ `vid<i>` folder is for R&D for each video, `make/run/clean` action is the same.
++ Put your source code into `src` folder, and naming convention follow background of the floor.
 
 + Remember to input video from command line argument, and output to file through `stdout` by redirecting:
 
