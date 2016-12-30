@@ -32,7 +32,7 @@ Ouput of build process is an exectable `center` file, then:
 
 ### Demo
 
-![Crop](demos/crop.png)
+![crop](http://i.imgur.com/l7GfIgt.png)
 
 Demo came with a frame (cropped) from wood floor & multi lane.
 As you can see, it draws contours, red point for center point.
