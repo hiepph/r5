@@ -4,6 +4,8 @@
  *
  * Though there're a little noise, but real problem is reflected light on the floor.
  * Thus, hard to detect 2-side contours and calculate center point.
+ * Here we split frame into 2 halves, and process each, export the center,
+ * then again get the center of 2-havles center.
  *
  * With problem frame, interpolating (get previous center(x, y)) is a considerable solution.
  *
