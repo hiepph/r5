@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
      */
 
     int current_frame = 0;
-    Point2d mid_point, prev_point;
+    Point2d midpoint, prevpoint;
     while (1) {
         // If cannot read the video, which means it is the end of video!
         Mat frame;
@@ -130,36 +130,36 @@ int main(int argc, char** argv) {
 
         // Get (x, y) of the  midpoint
         // And draw it
-        mid_point = (mc[0] + mc[1]) * 0.5;
+        midpoint = (mc[0] + mc[1]) * 0.5;
         Scalar mid_color = Scalar(0, 0, 255);
 
         // Rescue problem frame
         if (current_frame != 0) {
-          double dx = abs(mid_point.x - prev_point.x);
-          double dy = abs(mid_point.y - prev_point.y);
+          double dx = abs(midpoint.x - prevpoint.x);
+          double dy = abs(midpoint.y - prevpoint.y);
 
           if (dx > 50.0) {
-              mid_point.x = prev_point.x;
+              midpoint.x = prevpoint.x;
           }
 
           if (dy > frame.rows / 4) {
-              mid_point.y = prev_point.y;
+              midpoint.y = prevpoint.y;
           }
         }
 
-        circle(drawing, mid_point, 4, mid_color, -1, 8, 0);
+        circle(drawing, midpoint, 4, mid_color, -1, 8, 0);
 
         // Show frame to windows
         imshow(video, drawing);
 
         // Offset for midpoint, too
-        cout << current_frame << " " << (int)mid_point.x << " " << (int)(mid_point.y + row_offset) << endl;
+        cout << current_frame << " " << (int)midpoint.x << " " << (int)(midpoint.y + row_offset) << endl;
 
         // Increate index of frame
         current_frame++;
 
         // Update prev point for interpolating (prevent problem frame)
-        prev_point = mid_point;
+        prevpoint = midpoint;
 
         // Wait to display frame
         waitKey(20);
