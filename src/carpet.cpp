@@ -1,7 +1,24 @@
+/**
+ * This is code for processing with carpet floor, single lane:
+ *  + 01 - Nen tham, duong thang.avi
+ *  + 02 - Nen tham, duong cong.avi
+ *
+ * Mostly, there are no noises, and reflected light on the carpet floor.
+ * Thus, except for grayscale, and slightly blurring image,
+ * there are no need for too much job of processing image.
+ *
+ * If we can get center of 2-side conturs, and then get middle of it,
+ * that would be out desire center of lane.
+ *
+ * With problem frame (like too much noises, or no lane),
+ * interpolating (get previous (x, y) of center) is a considerable solution.
+ *
+ * Copyright 2016, @tim Team. All rights reserved.
+ */
+
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <string>
-#include <math.h>
 
 using namespace std;
 using namespace cv;
@@ -139,9 +156,8 @@ int main(int argc, char** argv)
         waitKey(20);
 
         // Offset for midpoint
-        // Output frame_id x_center y_center
-        // cout << current_frame << " " << (int)midpoint.x << " " << (int)(midpoint.y + row_offset) << endl;
-        cout << current_frame << " " << midpoint.x << " " << (midpoint.y + row_offset) << endl;
+        // Output: frame_id x_center y_center
+        cout << current_frame << " " << (int)midpoint.x << " " << (int)(midpoint.y + row_offset) << endl;
 
         // Increate index of frame
         current_frame++;

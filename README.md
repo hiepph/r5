@@ -1,4 +1,3 @@
-# [WIP]
 
 ## Build
 ```
@@ -25,22 +24,21 @@ make clean
 
 + `vid<i>` folder is for R&D for each video, `make/run/clean` action is the same.
 
-+ Remember to input video from command line argument, and output to file through `stdout` by Piping:
++ Remember to input video from command line argument, and output to file through `stdout` by redirecting:
 
 ```
-./center vid1.avi > Contestant.txt 
+./center vid1.avi > Contestant.txt
 ```
 
-+ Syntax of output:  
++ Syntax of output:
 
 ```
 N
-
 frame_id x_center y_center
 
 with,
     N: denotes number of frame
-    frame_id: id of current frame, 0-index
-    x_center: midpoint's x (double)
-    y_center: midpoint's y (double)
+    frame_id(int): id of current frame, 0-index
+    x_center(int): midpoint's x
+    y_center(int): midpoint's y
 ```
