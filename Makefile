@@ -15,15 +15,15 @@ LIBS = `pkg-config --cflags --libs opencv`
 
 # Default warning with syntax notification
 all:
-	$(error SYNTAX_ERROR: $$ make <target>)
+		$(error SYNTAX_ERROR: $$ make build TARGET=<target>)
 
 .PHONY: clean
 
 # With different background target, there would be different processing
-$(TARGET):
-	$(CC) $(CFLAGS) $(LIBS) -o $(MAIN) src/$(TARGET).cpp
+build:
+		$(CC) $(CFLAGS) $(LIBS) -o $(MAIN) src/${TARGET}.cpp
 
 # Clean all object linked, backup stuff,
 # and our executable file, for a fresh start
 clean:
-	$(RM) *.o *~ $(MAIN)
+		$(RM) *.o *~ $(MAIN)

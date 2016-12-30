@@ -3,7 +3,7 @@
  *  + 01 - Nen tham, duong thang.avi
  *  + 02 - Nen tham, duong cong.avi
  *
- * Mostly, there are no noises, and reflected light on the carpet floor.
+ * Mostly, there are no noises, and no reflected light on the carpet floor.
  * Thus, except for grayscale, and slightly blurring image,
  * there are no need for too much job of processing image.
  *
@@ -25,14 +25,14 @@ using namespace cv;
 
 int main(int argc, char** argv)
 {
-  /**
-   * Read input video from first command line argument
-   *      $ ./prog <video_path>
-   *
-   * Break program immediately and return -1 if no input video specified,
-   * or if something error happened (wrong type of video)
-   *
-   */
+    /**
+     * Read input video from first command line argument
+     *      $ ./prog <video_path>
+     *
+     * Break program immediately and return -1 if no input video specified,
+     * or if something error happened (wrong type of video)
+     *
+     */
 
     if (argc != 2) {
         printf("ERROR: %s <video_path>", argv[0]);
@@ -71,9 +71,8 @@ int main(int argc, char** argv)
     /**
      * Loop for continuously receiving frame
      */
-
     int current_frame = 0;
-    Point2d midpoint, prevpoint;
+    Point2d prevpoint;
     while (1) {
         // If cannot read the video, which means it is the end of video!
         Mat frame;
@@ -95,11 +94,11 @@ int main(int argc, char** argv)
 
         // Detect edges
         Mat canny_output;
-        vector<vector<Point>> contours;
-        vector<Vec4i> hierarchy;
         threshold(gray, canny_output, 95, 255, THRESH_BINARY);
 
         // Find contours
+        vector<vector<Point>> contours;
+        vector<Vec4i> hierarchy;
         findContours(canny_output, contours, hierarchy, CV_RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0));
 
         // Get the moments
@@ -152,9 +151,6 @@ int main(int argc, char** argv)
         // Show frame to windows
         imshow(video, drawing);
 
-        // wait to display frame
-        waitKey(20);
-
         // Offset for midpoint
         // Output: frame_id x_center y_center
         cout << current_frame << " " << (int)midpoint.x << " " << (int)(midpoint.y + row_offset) << endl;
@@ -164,7 +160,12 @@ int main(int argc, char** argv)
 
         // Update prev point for interpolating (prevent problem frame)
         prevpoint = midpoint;
+
+        // wait to display frame
+        waitKey(20);
     }
+
+    cap.release();
 
     return 0;
 }
