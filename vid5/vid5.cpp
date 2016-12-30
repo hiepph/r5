@@ -1,15 +1,34 @@
+#include <opencv2/opencv.hpp>
 #include <iostream>
-#include <queue>
 #include <algorithm>
-#include "opencv2\opencv.hpp"
+#include <queue>
 
 using namespace std;
 using namespace cv;
 
 int default_thresh = 149;
 
-int main() {
-	VideoCapture cap("test5.avi");
+int main(int argc, char** argv) {
+  /**
+   * Read input video from first command line argument
+   *      $ ./prog <video_path>
+   *
+   * Break program immediately and return -1 if no input video specified,
+   * or if something error happened (wrong type of video)
+   *
+   */
+
+  if (argc != 2) {
+      printf("error: %s <video_path>", argv[0]);
+      return -1;
+  }
+
+  string video = argv[1];
+  VideoCapture cap(video);
+  if (!cap.isOpened()) {
+      cout << "error reading " << video << endl;
+      return -1;
+  }
 
 	int thresh = default_thresh;
 
@@ -48,7 +67,7 @@ int main() {
 
 			/// Get the moments
 			vector<Moments> mu(contours.size());
-			for (int i = 0; i < contours.size(); i++)
+			for (size_t i = 0; i < contours.size(); i++)
 			{
 				mu[i] = moments(contours[i], false);
 
@@ -58,7 +77,7 @@ int main() {
 			Point2d mid_point;
 			int valid_points = 0;
 			vector<Point2d> mc(contours.size());
-			for (int i = 0; i < contours.size(); i++)
+			for (size_t i = 0; i < contours.size(); i++)
 			{
 				mc[i] = Point2d(mu[i].m10 / mu[i].m00, mu[i].m01 / mu[i].m00);
 				cout << mu[i].m00 << "(" << mc[i].x << "," << mc[i].y << ")\t";
@@ -70,7 +89,7 @@ int main() {
 			mid_point /= valid_points;
 			cout << endl << "valid: " << valid_points << endl;
 			cout << "calculated_center: (" << mid_point.x << "," << mid_point.y << ")" << endl;
-			
+
 			/// Manually process several first frames by retaking min_thresh_val
 			if (mid_point.x <= 300) {
 				thresh = 112;
@@ -81,7 +100,7 @@ int main() {
 
 			/// Draw contours
 			Mat drawing = Mat::zeros(threshold_output.size(), CV_8UC3);
-			for (int i = 0; i< contours.size(); i++)
+			for (size_t i = 0; i< contours.size(); i++)
 			{
 				Scalar color = Scalar(0, 255, 0);
 				drawContours(drawing, contours, i, color, 2, 8, hierarchy, 0, Point());
