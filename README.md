@@ -15,16 +15,16 @@ make build TARGET=carpet|marble|wood_noise|wood_multi
 With:
   + `carpet.cpp`: videos 1 + 2
 
-  + `marble.cpp`: videos 3
+  + `marble.cpp`: video 3
 
-  + `wood_noise.cpp`: videos 4
+  + `wood_noise.cpp`: video 4
 
-  + `wood_multi.cpp`: videos 5
+  + `wood_multi.cpp`: video 5
 
 
 ## Run
 
-Ouput of build process will output an exectable `center` file:
+Ouput of build process is an exectable `center` file, then:
 
 ```
 ./center <video_path>
