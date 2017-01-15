@@ -147,10 +147,12 @@ int main(int argc, char** argv) {
                     }
                 } else if (dx < 10.0 && dy > 10.0) {
                     midpoint = prevpoint;
-                    midpoint.x -= dx;
+                    if (11.0 < dy && dy < 35.0) {
+						midpoint.x -= ((int)round(dx)) % 10;
+					}
                 } else if (dx > 10.0 && dy > 10.0) {
                     midpoint = prevpoint;
-                    midpoint.x -= dx;
+                    midpoint.x -= ((int)round(dx)) % 10;
                 }
             }
 
