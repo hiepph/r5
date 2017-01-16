@@ -105,6 +105,18 @@ int main(int argc, char** argv) {
     }
 
     /**
+     * Prepare for output video (just a crop of origin)
+     */
+    VideoWriter ov(
+        "center.avi",
+        // CV_FOURCC('M', 'J', 'P', 'G'),
+        CV_FOURCC('P', 'I', 'M', '1'),
+        30,
+        Size(cap.get(CV_CAP_PROP_FRAME_WIDTH), (int)cap.get(CV_CAP_PROP_FRAME_HEIGHT) / 4),
+        true
+    );
+
+    /**
      * Output to stdout follow below syntax:
      *
      *      N
@@ -181,6 +193,9 @@ int main(int argc, char** argv) {
 
         // Show frame to windows
         imshow(video, drawing);
+
+        // write drawing to Output
+        ov.write(drawing);
 
         // Offset for midpoint
         // Output: frame_id x_center y_center

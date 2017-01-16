@@ -5,6 +5,8 @@
 
 # Yup, of course our precious executable file
 MAIN := center
+# And output video
+OV := center.avi
 
 # Compile with g++, full warning and optimization level 2
 CC = g++
@@ -26,4 +28,4 @@ build:
 # Clean all object linked, backup stuff,
 # and our executable file, for a fresh start
 clean:
-	$(RM) *.o *~ $(MAIN)
+	$(RM) *.o *~ $(MAIN) $(OV)
