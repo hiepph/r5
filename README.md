@@ -30,6 +30,8 @@ Ouput of build process is an exectable `center` file, then:
 ./center <video_path>
 ```
 
+Check output video: `center.avi`
+
 ### Demo
 
 ![crop](http://i.imgur.com/l7GfIgt.png)
