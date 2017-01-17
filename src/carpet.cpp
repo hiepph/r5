@@ -51,8 +51,8 @@ int main(int argc, char** argv)
      */
     VideoWriter ov(
         "center.avi",
-        // CV_FOURCC('M', 'J', 'P', 'G'),
-        CV_FOURCC('P', 'I', 'M', '1'),
+        CV_FOURCC('M', 'J', 'P', 'G'),
+        // CV_FOURCC('P', 'I', 'M', '1'),
         30,
         Size(cap.get(CV_CAP_PROP_FRAME_WIDTH), (int)cap.get(CV_CAP_PROP_FRAME_HEIGHT) / 4),
         true
